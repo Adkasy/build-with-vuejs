@@ -1,18 +1,13 @@
 <template>
   <Header />
-  <h2 class="title-page">Update Data</h2>
+  <h2 class="title-page">Add New User</h2>
   <div class="container">
-    <form class="add-form" onsubmit="return false">
+    <form class="add-form" onsubmit="return false" @submit.prevent="submitForm">
       <input type="text" name="" placeholder="Image" v-model="image" />
       <input type="text" name="" placeholder="First Name" v-model="firstName" />
-      <input
-        type="text"
-        name=""
-        placeholder="Last Name"
-        v-model="maskedLastName"
-      />
+      <input type="text" name="" placeholder="Last Name" v-model="lastName" />
       <input type="text" name="" placeholder="Gender" v-model="gender" />
-      <input type="text" name="" placeholder="Age" v-model="age" />
+      <input type="number" name="" placeholder="Age" v-model="age" />
       <input
         type="text"
         name=""
@@ -26,12 +21,16 @@
         v-model="university"
       />
       <button
-        @click="updateDataUser(this.$route.params.userID)"
+        @click="addNewUser"
         class="btn btn-primary"
         :disabled="isFormIncomplete"
       >
         Submit
       </button>
+      <!-- <button class="btn btn-danger text-dark">
+        <router-link to="/"> Cancel</router-link>
+      </button> -->
+      <p v-if="formError" class="error">Please fill in all fields</p>
     </form>
   </div>
 </template>
@@ -42,17 +41,17 @@ import { mapActions, mapState, mapWritableState } from "pinia";
 import { useUserStore } from "../stores/user";
 
 export default {
-  name: "UpdatePage",
-  data() {
-    return {};
-  },
-
+  name: "add",
   components: {
     Header,
   },
 
+  data() {
+    return {};
+  },
+
   methods: {
-    ...mapActions(useUserStore, ["updateDataUser"]),
+    ...mapActions(useUserStore, ["submitForm", "addNewUser", "getAllData"]),
   },
 
   computed: {
@@ -64,15 +63,11 @@ export default {
       "age",
       "phoneNumber",
       "university",
+      "formError",
     ]),
-
-    maskedLastName: function () {
-      return this.lastName.replace(/./g, "*");
-    },
 
     isFormIncomplete() {
       return (
-        !this.image ||
         !this.firstName ||
         !this.lastName ||
         !this.gender ||
@@ -83,20 +78,12 @@ export default {
     },
   },
 
-  async mounted() {
-    const result = await fetch(
-      "https://dummyjson.com/users/" + this.$route.params.userID
-    ).then((res) => res.json());
+  created() {
+    this.getAllData();
 
-    console.log(result);
-
-    this.image = result.image;
-    this.firstName = result.firstName;
-    this.lastName = result.lastName;
-    this.gender = result.gender;
-    this.age = result.age;
-    this.phoneNumber = result.phone;
-    this.university = result.university;
+    // Inputmask({
+    //   mask: "A{1,20}",
+    // }).mask(this.$refs.lastNameInput);
   },
 };
 </script>
@@ -125,11 +112,17 @@ button {
   height: 50px;
   width: 250px;
   display: block;
+  text-decoration: none;
 }
 
 .title-page {
   text-align: center;
   margin: 100px auto 40px;
   width: fit-content;
+}
+
+.error {
+  color: red;
+  text-align: center;
 }
 </style>

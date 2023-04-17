@@ -47,36 +47,22 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useUserStore } from "../stores/user";
+
 export default {
   name: "Content",
+
   data() {
-    return {
-      allUser: [],
-    };
+    return {};
   },
 
   methods: {
-    async getAllData() {
-      await fetch("https://dummyjson.com/users")
-        .then((res) => res.json())
-        .then((data) => {
-          this.allUser = data.users; // Menyimpan hasil respon ke variabel allData
-        });
+    ...mapActions(useUserStore, ["getAllData", "deleteUser"]),
+  },
 
-      console.log(this.allUser, "<-- Ini hasil lognya");
-    },
-
-    async deleteUser(userID) {
-      const deleteData = await fetch(`https://dummyjson.com/users/${userID}`, {
-        method: "DELETE",
-      }).then((res) => res.json());
-
-      console.log(deleteData, "<- Ini delete data");
-
-      if (deleteData.isDeleted == true) {
-        this.getAllData();
-      }
-    },
+  computed: {
+    ...mapState(useUserStore, ["allUser"]),
   },
 
   mounted() {

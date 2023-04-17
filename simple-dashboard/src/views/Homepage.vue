@@ -3,12 +3,13 @@
   <Header />
 
   <!-- SIDEBAR -->
-  <!-- <div class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
-      <Sidebar />
+      <!-- <Sidebar /> -->
     </div>
-  </div> -->
+  </div>
 
+  <!-- CONTENT -->
   <Content />
 
   <!-- Footer -->

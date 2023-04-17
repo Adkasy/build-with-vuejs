@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
+    <router-link class="navbar-brand" to="/">
       <img
         src="../assets/ip-logo.png"
         width="40"
@@ -12,7 +12,7 @@
       <div class="navbar-text mx-auto">
         <h4 class="m-0">Admin Dashboard</h4>
       </div>
-    </a>
+    </router-link>
 
     <form class="form-inline mx-auto">
       <input
@@ -20,17 +20,19 @@
         type="search"
         placeholder="Search"
         aria-label="Search"
-        style="width: 700px; margin-left: 200px"
+        style="width: 700px"
       />
     </form>
 
-    <button
-      type="button"
-      class="add-button btn btn-success ml-5"
-      style="margin-right: 80px; width: 150px"
-    >
-      Add User
-    </button>
+    <router-link to="/add">
+      <button
+        type="button"
+        class="add-button btn btn-success ml-5"
+        style="margin-right: 80px; width: 150px"
+      >
+        Add User
+      </button>
+    </router-link>
   </nav>
 </template>
 
