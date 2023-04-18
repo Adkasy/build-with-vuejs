@@ -5,12 +5,7 @@
     <form class="add-form" onsubmit="return false">
       <input type="text" name="" placeholder="Image" v-model="image" />
       <input type="text" name="" placeholder="First Name" v-model="firstName" />
-      <input
-        type="text"
-        name=""
-        placeholder="Last Name"
-        v-model="maskedLastName"
-      />
+      <input type="text" name="" placeholder="Last Name" v-model="lastName" />
       <input type="text" name="" placeholder="Gender" v-model="gender" />
       <input type="text" name="" placeholder="Age" v-model="age" />
       <input
@@ -32,6 +27,7 @@
       >
         Submit
       </button>
+      <p v-if="formError" class="error">Please fill in all fields</p>
     </form>
   </div>
 </template>
@@ -64,6 +60,7 @@ export default {
       "age",
       "phoneNumber",
       "university",
+      "formError",
     ]),
 
     maskedLastName: function () {
@@ -114,9 +111,9 @@ export default {
 
 .container {
   display: flex;
-  justify-content: center; /* Mengatur item di tengah secara horizontal */
-  /* align-items: center; Mengatur item di tengah secara vertikal */
-  height: 100vh; /* Mengatur tinggi container agar mencakup seluruh tinggi halaman */
+  justify-content: center; /* Ngatur item di tengah secara horizontal */
+  /* align-items: center; Ngatur item di tengah secara vertikal */
+  height: 100vh; /* Ngatur tinggi container agar mencakup seluruh tinggi halaman */
 }
 
 button {

@@ -2,15 +2,20 @@
   <!-- HEADER -->
   <Header />
 
-  <!-- SIDEBAR -->
+  <!-- SIDEBAR & CONTENT -->
   <div class="container-fluid">
     <div class="row">
-      <!-- <Sidebar /> -->
+      <!-- SIDEBAR -->
+      <div class="col-md-3">
+        <Sidebar />
+      </div>
+
+      <!-- CONTENT -->
+      <div class="col-md-9">
+        <Content />
+      </div>
     </div>
   </div>
-
-  <!-- CONTENT -->
-  <Content />
 
   <!-- Footer -->
   <Footer />

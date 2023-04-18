@@ -13,6 +13,7 @@ export const useUserStore = defineStore('user', {
       university: "",
       formError: false,
       newAddDataContainer: [],
+      newEditDataContainer: [],
     }),
 
 
@@ -27,7 +28,7 @@ export const useUserStore = defineStore('user', {
         .then((res) => res.json())
         .then((data) => {
           this.allUser = data.users; // Nyimpen hasil respon ke variabel allData
-          this.allUser = [...this.allUser, ...this.newAddDataContainer]
+          this.allUser = [...this.allUser, ...this.newAddDataContainer, ...this.newEditDataContainer]
         });
 
       console.log(this.allUser, "<-- Ini hasil lognya");
@@ -62,6 +63,8 @@ export const useUserStore = defineStore('user', {
     async addNewUser() {
       console.log("Submit button on add page was clicked");
 
+      this.submitForm()
+
       const newUser = await fetch("https://dummyjson.com/users/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -79,9 +82,15 @@ export const useUserStore = defineStore('user', {
 
       console.log(newUser);
 
-      this.newAddDataContainer.push(newUser)
+      if (this.formError) {
+        alert('Please fill in all fields')
+      } else {
+        this.newAddDataContainer.push(newUser)
+        this.router.push('/')
+      }
 
-      //Reset form
+
+      //Reset form ke awal biar kosong lagi
       this.image = ""
       this.firstName = ""
       this.lastName = ""
@@ -90,7 +99,6 @@ export const useUserStore = defineStore('user', {
       this.phoneNumber = ""
       this.university = ""
 
-      this.router.push('/')
     },
 
     async updateDataUser(userID) {
@@ -100,17 +108,22 @@ export const useUserStore = defineStore('user', {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            image: this.image,
             firstName: this.firstName,
             lastName: this.lastName,
             gender: this.gender,
             age: this.age,
-            phoneNumber: this.phoneNumber,
+            phone: this.phoneNumber,
             university: this.university,
           }),
         }
       ).then((res) => res.json());
 
       console.log(updateData);
+
+      this.newEditDataContainer.push(updateData)
+      // this.allUser.filter((el) => (el.id !== updateData.id))
+      // this.deleteUser(userID)
 
       this.router.push('/')
     },

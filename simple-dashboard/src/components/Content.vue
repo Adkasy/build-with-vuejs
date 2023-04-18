@@ -1,6 +1,6 @@
 <template>
   <div class="content-page container d-flex justify-content-center">
-    <div style="width: 1500px">
+    <div style="width: 1800px">
       <!-- <button class="add-button btn btn-success mb-3">Add User</button> -->
       <table class="table">
         <thead class="thead-dark">
@@ -79,6 +79,7 @@ export default {
 .content-page {
   margin-top: 90px;
   margin-bottom: 0px;
+  margin-left: 0;
 }
 
 .add-button {

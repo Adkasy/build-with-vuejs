@@ -3,22 +3,42 @@
   <h2 class="title-page">Add New User</h2>
   <div class="container">
     <form class="add-form" onsubmit="return false" @submit.prevent="submitForm">
-      <input type="text" name="" placeholder="Image" v-model="image" />
-      <input type="text" name="" placeholder="First Name" v-model="firstName" />
-      <input type="text" name="" placeholder="Last Name" v-model="lastName" />
-      <input type="text" name="" placeholder="Gender" v-model="gender" />
-      <input type="number" name="" placeholder="Age" v-model="age" />
+      <input type="text" name="" placeholder="Image" v-model="image" required />
+      <input
+        type="text"
+        name=""
+        placeholder="First Name"
+        v-model="firstName"
+        required
+      />
+      <input
+        type="text"
+        name=""
+        placeholder="Last Name"
+        v-model="lastName"
+        required
+      />
+      <input
+        type="text"
+        name=""
+        placeholder="Gender"
+        v-model="gender"
+        required
+      />
+      <input type="number" name="" placeholder="Age" v-model="age" required />
       <input
         type="text"
         name=""
         placeholder="Phone Number"
         v-model="phoneNumber"
+        required
       />
       <input
         type="text"
         name=""
         placeholder="University"
         v-model="university"
+        required
       />
       <button
         @click="addNewUser"
@@ -27,9 +47,6 @@
       >
         Submit
       </button>
-      <!-- <button class="btn btn-danger text-dark">
-        <router-link to="/"> Cancel</router-link>
-      </button> -->
       <p v-if="formError" class="error">Please fill in all fields</p>
     </form>
   </div>
@@ -68,6 +85,7 @@ export default {
 
     isFormIncomplete() {
       return (
+        !this.image ||
         !this.firstName ||
         !this.lastName ||
         !this.gender ||
@@ -75,6 +93,10 @@ export default {
         !this.phoneNumber ||
         !this.university
       );
+    },
+
+    maskedLastName() {
+      return this.lastName ? this.lastName.replace(/./g, "*") : "";
     },
   },
 
@@ -101,9 +123,9 @@ export default {
 
 .container {
   display: flex;
-  justify-content: center; /* Mengatur item di tengah secara horizontal */
-  /* align-items: center; Mengatur item di tengah secara vertikal */
-  height: 100vh; /* Mengatur tinggi container agar mencakup seluruh tinggi halaman */
+  justify-content: center; /* Ngatur item di tengah secara horizontal */
+  /* align-items: center; Ngatur item di tengah secara vertikal */
+  height: 100vh; /* Ngatur tinggi container agar mencakup seluruh tinggi halaman */
 }
 
 button {

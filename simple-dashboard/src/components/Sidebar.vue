@@ -1,7 +1,7 @@
 <template>
   <div
     class="sidebar d-flex flex-column flex-shrink-0 p-3 text-dark bg-light"
-    style="width: 250px; height: 100vh"
+    style="width: 250px; height: 99.50%; margin-left: 0;"
   >
     <ul class="nav flex-column mb-auto mt-3">
       <li class="mb-3">
@@ -64,9 +64,10 @@ export default {
 <style scoped>
 .sidebar {
   margin-top: 65px;
+  margin-left: 0;
 }
 
 .menu-text {
-  margin-left: 15px; /* Adjust the value as needed for the desired spacing */
+  margin-left: 15px; 
 }
 </style>
